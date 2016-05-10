@@ -1,6 +1,9 @@
 #Linux下挂载硬盘的方法
+1. 查看当前分区情况
+	
+		df -h
 
-1. 添加磁盘，查看磁盘状况
+2. 添加磁盘，查看磁盘状况
     
 		[root@db1 /]# fdisk -l
 		Disk /dev/sda: 10.7 GB, 10737418240 bytes
@@ -17,7 +20,7 @@
  
 	从查询结果看出，多了一个/dev/sdb的盘
  
-2. 用fdisk 对/dev/sdb 进行分区
+3. 用fdisk 对/dev/sdb 进行分区
  
 		[root@db1 /]# fdisk /dev/sdb
 		Command (m for help): n
@@ -78,7 +81,7 @@
 
 
  
-3. 格式化 /dev/sdb1 分区
+4. 格式化 /dev/sdb1 分区
  
 		[root@db1 /]# mkfs -t ext3 /dev/sdb1
 		mke2fs 1.35 (28-Feb-2004)
@@ -103,7 +106,7 @@
 		This filesystem will be automatically checked every 30 mounts or
 		180 days, whichever comes first.  Use tune2fs -c or -i to override.
  
-4. 创建目录 并将 /dev/sdb1 挂在到该目录下
+5. 创建目录 并将 /dev/sdb1 挂在到该目录下
  
 		[root@db1 /]# ls
 		backup  dev   initrd      media  opt   sbin     sys       usr
@@ -116,7 +119,7 @@
 		boot    home  lost+found  mnt    root  srv      tmp       var
 		[root@db1 /]# mount /dev/sdb1 /u01
  
-5. 验证挂载是否成功
+6. 验证挂载是否成功
 
 		[root@db1 /]# df -k
 		Filesystem           1K-blocks      Used Available Use% Mounted on
@@ -124,7 +127,7 @@
 		none                    454256         0    454256   0% /dev/shm
 		/dev/sdb1              5154852     43040   4849956   1% /backup
  
-6. 设置开机自动挂载
+7. 设置开机自动挂载
  
 		[root@db1 /]# vi /etc/fstab
 		# This file is edited by fstab-sync - see 'man fstab-sync' for details
@@ -139,3 +142,7 @@
 		anaged 0 0
 		/dev/fd0                /media/floppy           auto    pamconsole,exec,noauto,m
 		anaged 0 0
+
+8. 阿里云分区可参考
+		
+	[https://help.aliyun.com/document_detail/25426.html?spm=5176.775974154.0.0.7Lnp5C](https://help.aliyun.com/document_detail/25426.html?spm=5176.775974154.0.0.7Lnp5C "Linux格式化和挂载数据盘")
