@@ -23,18 +23,18 @@
 3. 用fdisk 对/dev/sdb 进行分区
  
 		[root@db1 /]# fdisk /dev/sdb
-		Command (m for help): n
+		Command (m for help): n //创建新分区
 		Command action
 		   e   extended
 		   p   primary partition (1-4)
-		p
-		Partition number (1-4): 1
+		p //创建主分区
+		Partition number (1-4): 1 //新建主分区序号
 		First cylinder (1-652, default 1):
 		Using default value 1
 		Last cylinder or +size or +sizeM or +sizeK (1-652, default 652):
 		Using default value 652
 		 
-		Command (m for help): w
+		Command (m for help): w //w 表示保存
 		The partition table has been altered!
 		 
 		Calling ioctl() to re-read partition table.
