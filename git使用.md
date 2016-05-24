@@ -27,3 +27,6 @@
 	 找到setting
 	 进入页面后，点击Delete this repository 
 	 输入项目名，点击 I understand the consequences，delete this repository
+6.修改远程仓库地址 modify remote url
+	
+	 git remote set-url origin 新地址
