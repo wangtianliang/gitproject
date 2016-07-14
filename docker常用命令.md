@@ -24,9 +24,16 @@
 	docker容器可以理解为在沙盒中运行的进程。这个沙盒包含了该进程运行所必须的资源，包括文件系统、系统类库、shell 环境等等。但这个沙盒默认是不会运行任何程序的。你需要在沙盒中运行一个进程来启动某一个容器。这个进程是该容器的唯一进程，所以当该进程结束的时候，容器也会完全的停止。
 
 		# 在容器中运行"echo"命令，输出"hello word"  
-		$docker run image_name echo "hello word"  
+		$docker run image_name echo "hello word"
+  
 		# 交互式进入容器中  
-		$docker run -i -t image_name /bin/bash    
+		$docker run -i -t image_name /bin/bash  
+		* -i：表示以“交互模式”运行容器
+		* -t：表示容器启动后会进入其命令行
+		* -v：表示需要将本地哪个目录挂载到容器中，格式：-v <宿主机目录>:<容器目录>  
+		* 假设我们的所有安装程序都放在了宿主机的/root/software/目录下，现在需要将其挂载到容器的/mnt/software/目录下。
+
+		
 		# 在容器中安装新的程序  
 		$docker run image_name apt-get install -y app_name  
 
