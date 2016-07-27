@@ -165,3 +165,23 @@ Docker RPM包已经包含在CentOS-Extra仓库中，所以我们可以直接使�
 		#删除镜像、容器
 		rm -rf /var/lib/docker
 		#查找并删除用户配置文件
+#docker安装问题解决
+1. 问题描述
+	nsenter命令找不到
+2. 问题解决
+	
+		如果没安装可创建install.sh，内容如下
+
+		#!/bin/bash
+		curl https://www.kernel.org/pub/linux/utils/util-linux/v2.24/util-linux-2.24.tar.gz | tar -zxf-
+		cd util-linux-2.24
+		./configure --without-ncurses
+		make nsenter
+		sudo cp nsenter /usr/local/bin
+		cd .. && rm -rf util-linux-2.24
+		
+		赋予install.sh执行权限
+		chmod 755 install.sh 
+
+		执行install.sh
+		./install.sh

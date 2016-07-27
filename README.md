@@ -59,4 +59,10 @@
 		sudo service ntpd restart
 		
 		# 将系统时区改为上海时间 (亦即CST时区)
-		$ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime	
+		$ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+12. 注销当前登录用户
+
+		#查看当前登录用户
+		w
+		#踢掉TTY对应的用户
+		pkill -kill -t TTY
