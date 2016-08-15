@@ -66,3 +66,7 @@
 		w
 		#踢掉TTY对应的用户
 		pkill -kill -t TTY
+13. centos7查看开放端口号
+	
+		firewall-cmd --list-all
+		cat /etc/firewalld/zones/public.xml
