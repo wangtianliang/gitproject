@@ -10,6 +10,9 @@
 	docker kill # 发送信号给容器，默认SIGKILL
 	docker attach # 连接(进入)到一个正在运行的容器
 	docker wait # 阻塞到一个容器，直到容器停止运行
+#容器启动调整
+
+	docker update --restart=always Name/ID docker服务重启对应容器跟着启动
 #获取容器相关信息
 
 	docker ps # 显示状态为运行（Up）的容器
@@ -24,34 +27,50 @@
 
 	docker cp # 从容器里向外拷贝文件或目录
 	docker export # 将容器整个文件系统导出为一个tar包，不带layers、tag等信息
+	docker export tomcat > tomcat.tar
+	docker export --output="tomcat.tar" tomcat
+
+	docker import # 从一个tar包创建一个镜像，往往和export结合使用
+	docker import /path/to/tomcat.tar
 #执行
 
 	docker exec # 在容器里执行一个命令，可以执行bash进入交互式
 #镜像操作
 
 	docker images # 显示本地所有的镜像列表
-	docker import # 从一个tar包创建一个镜像，往往和export结合使用
 	docker build # 使用Dockerfile创建镜像（推荐）
 	docker commit # 从容器创建镜像
 	docker rmi # 删除一个镜像
-	docker load # 从一个tar包创建一个镜像，和save配合使用
-	docker save # 将一个镜像保存为一个tar包，带layers和tag信息
 	docker history # 显示生成一个镜像的历史命令
 	docker tag # 为镜像起一个别名
+	
+	docker save # 将一个镜像保存为一个tar包，带layers和tag信息
+	docker save tomcat > /opt/tomcat.tar
+	docker save --output /opt/tomcat.tar tomcat
+	docker save -o /opt/tomcat.tar tomcat
+
+	docker load # 从一个tar包创建一个镜像，和save配合使用
+	docker load  < tomcat.tar
+	docker load --input tomcat.tar
+	docekr load -i tomcat.tar
 #镜像仓库(registry)操作
 
 	docker login # 登录到一个registry
 	docker search # 从registry仓库搜索镜像
 	docker pull # 从仓库下载镜像到本地
 	docker push # 将一个镜像push到registry仓库中
-1. 查看日志
+#启动docker daemon并重启docker
 
-		docker logs 容器
-		如果要持续观察日志：
-		docker logs -f 容器，
-		这个时候日志是从头开时读的，如果日志很长会刷屏很久，
-		如果只打算看最新的日志可以采用以下的方式：
-		docker logs --tail 0 -f  容器
-2.获取容器环境变量
-	
-		docker exec container_id env
+	sudo systemctl enable docker.service
+	sudo systemctl start docker.service
+#查看日志
+
+	docker logs ID/Name
+	如果要持续观察日志：
+	docker logs -f ID/Name
+	这个时候日志是从头开时读的，如果日志很长会刷屏很久，
+	如果只打算看最新的日志可以采用以下的方式：
+	docker logs --tail n -f  ID/Name
+#获取容器环境变量
+
+	docker exec container_id env
